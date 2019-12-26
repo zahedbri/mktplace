@@ -1,14 +1,15 @@
 const router = require('express').Router();
 const Product = require('../models/product');
+const upload = require('../middlewares/upload-photo');
 
 // POST request :  Create new product
-router.post("/products", async(req, res) => {
+router.post("/products", upload.single("photo"), async(req, res) => {
     try {
         // price: Number, stockQuantity : Number, rating: Number
         let product = new Product();
         product.title = req.body.title;
         product.description = req.body.description;
-        product.photo = req.body.photo;
+        product.photo = req.file.location;
         product.stockQuantity = req.body.stockQuantity;
 
         await product.save();
