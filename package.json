@@ -10,7 +10,9 @@
   "keywords": [
     "vuejs",
     "amazon",
-    "nuxjs"
+    "nuxjs",
+    "mongodb",
+    "mongodb atlas"
   ],
   "author": "Ola Ajibode",
   "license": "MIT",

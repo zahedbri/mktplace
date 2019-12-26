@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const User = require('./models/user');
 
-const app = express()
+const app = express();
 dotenv.config();
 
 app.use(morgan('dev'))
@@ -14,7 +14,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
 
 const productRoute = require('./routes/product');
+const categoryRoute = require('./routes/category');
+const ownerRoute = require('./routes/owner');
+
 app.use("/api", productRoute);
+app.use("/api", categoryRoute);
+app.use("/api", ownerRoute);
 
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -26,13 +31,6 @@ mongoose.connect(process.env.DATABASE, {
         console.log("INFO: connected to persistence layer.....");
     }
 });
-
-// app.post('/', (req, res) => {     let user = new User();     user.name =
-// req.body.name;     user.email = req.body.email;     user.password =
-// req.body.password;     user.save(err => {         if (err) { res.json(err); }
-// else {             res.json("successfully saved!");        }     }); });
-// app.get('/', (req, res) => {     res.json({"location": "London", "version":
-// "0.1.0"}); });
 
 app.listen(port, err => {
     if (err) {
