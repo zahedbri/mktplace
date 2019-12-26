@@ -13,6 +13,9 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
 
+const productRoute = require('./routes/product');
+app.use("/api", productRoute);
+
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -24,26 +27,12 @@ mongoose.connect(process.env.DATABASE, {
     }
 });
 
-app.post('/', (req, res) => {
-    let user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
-
-    user.save(err => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json("successfully saved!");
-        }
-
-    });
-
-});
-
-app.get('/', (req, res) => {
-    res.json({"location": "London", "version": "0.1.0"});
-});
+// app.post('/', (req, res) => {     let user = new User();     user.name =
+// req.body.name;     user.email = req.body.email;     user.password =
+// req.body.password;     user.save(err => {         if (err) { res.json(err); }
+// else {             res.json("successfully saved!");        }     }); });
+// app.get('/', (req, res) => {     res.json({"location": "London", "version":
+// "0.1.0"}); });
 
 app.listen(port, err => {
     if (err) {
