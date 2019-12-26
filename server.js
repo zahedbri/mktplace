@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const User = require('./models/user');
 
-const app = express()
+const app = express();
 dotenv.config();
 
 app.use(morgan('dev'))
@@ -14,7 +14,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
 
 const productRoute = require('./routes/product');
+const categoryRoute = require('./routes/category');
+
 app.use("/api", productRoute);
+app.use("/api", categoryRoute);
 
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
