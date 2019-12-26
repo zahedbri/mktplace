@@ -4,7 +4,6 @@ const Category = require('../models/category');
 // POST request :  Create new category
 router.post("/categories", async(req, res) => {
     try {
-        // price: Number, stockQuantity : Number, rating: Number
         let category = new Category();
         category.type = req.body.type;
 
@@ -16,11 +15,11 @@ router.post("/categories", async(req, res) => {
         res
             .status(500)
             .json({success: false, message: err.message});
-
     }
 
 });
 
+// GET request: Get all categories
 router.get('/categories', async(req, res) => {
     try {
         let categories = await Category.find();
@@ -32,7 +31,7 @@ router.get('/categories', async(req, res) => {
     }
 });
 
-// GET request: Get all categories GET request: Get  a single category PUT
-// request: Update  a single category DELETE request: Delete a single category
+//  GET request: Get  a single category PUT request: Update  a single category
+// DELETE request: Delete a single category
 
 module.exports = router;

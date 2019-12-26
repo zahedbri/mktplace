@@ -49,7 +49,7 @@ router.get('/products/:id', async(req, res) => {
 });
 
 // PUT request: Update  a single product
-router.put('/products/:id', async(req, res) => {
+router.put('/products/:id', upload.single("photo"), async(req, res) => {
     try {
         let product = await Product.findOneAndUpdate({
             _id: req.params.id
@@ -62,8 +62,8 @@ router.put('/products/:id', async(req, res) => {
                 photo: req.file.location,
                 owner: req.body.ownerID
             }
-
         }, {upsert: true});
+
         res.json({success: true, updatedProduct: product});
     } catch (err) {
         res
@@ -75,7 +75,7 @@ router.put('/products/:id', async(req, res) => {
 // DELETE request: Delete a single product
 router.delete('/products/:id', async(req, res) => {
     try {
-        let product = await Product.deleteOne({_id: req.params.id});
+        let deletedProduct = await Product.findOneAndDelete({_id: req.params.id});
         res.json({success: true, message: "Product successfully deleted!"});
     } catch (err) {
         res
