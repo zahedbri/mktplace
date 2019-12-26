@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const Category = require('../models/category');
-const upload = require('../middlewares/upload-photo');
 
 // POST request :  Create new category
 router.post("/categories", async(req, res) => {
