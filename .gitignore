@@ -1,3 +1,6 @@
 node_modules
 .env
 .metals
+app/routes
+app/.env
+app/node_modules
