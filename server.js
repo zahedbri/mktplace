@@ -32,6 +32,12 @@ mongoose.connect(process.env.DATABASE, {
     }
 });
 
+//return json on '/' with app info
+app.get('/', (req, res) => {
+  res.json({"app": "MarketPlace", "version": "0.0.2", "apiLocation": "/api/"});
+});
+
+
 app.listen(port, err => {
     if (err) {
         console.log(err);
